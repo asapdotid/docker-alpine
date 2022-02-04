@@ -1,17 +1,26 @@
-# Docker-Ansible base image
+# Docker Ansible
 
-![Docker Automated build](https://img.shields.io/docker/automated/asapdotid/ansible-alpine) [![Docker Pulls](https://img.shields.io/docker/pulls/asapdotid/ansible-alpine.svg)](https://hub.docker.com/r/asapdotid/ansible-alpine/)
+![Docker Automated build](https://img.shields.io/docker/automated/asapdotid/ansible) [![Docker Pulls](https://img.shields.io/docker/pulls/asapdotid/ansible.svg)](https://hub.docker.com/r/asapdotid/ansible/tools)
+
+Base image: `cytopia/docker-ansible` [project](https://github.com/cytopia/docker-ansible)
+
+Image version:
+
+-   (asapdotid/ansible:tools) Tools ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/asapdotid/ansible/tools)
 
 ## Additional services
 
-- Sed
-- Bash
-- Base64
+-   Sed
+-   Curl
+-   Gawk
+-   Rsync
 
 ## Check docker image version
 
+-   Version: asapdotid/ansible:tools
+
 ```bash
-docker run -t -i --rm asapdotid/ansible-alpine:${version} bash
+docker run -t -i --rm asapdotid/ansible:${version} bash
 ```
 
 ## Cleaning Docker
@@ -24,22 +33,9 @@ docker system prune --all --force --volumes
 
 ### Environnement variable
 
-| Variable             | Default Value    | Usage                                       |
-| -------------------- | ---------------- | ------------------------------------------- |
-| PIP_REQUIREMENTS     | requirements.txt | install python library requirements         |
-| ANSIBLE_REQUIREMENTS | requirements.yml | install ansible galaxy roles requirements   |
-| DEPLOY_KEY           |                  | pass an SSH private key to use in container |
-| DEPLOY_HOST          |                  | pass an SSH known hosts use in container    |
-
 ### Mitogen
 
-To enable mitogen, add this configuration into defaults in defaults.cfg file
-
-```
-action_plugins = ~/.ansible/plugins/action:/usr/share/ansible/plugins/action
-strategy_plugins = /opt/mitogen/ansible_mitogen/plugins/strategy
-strategy = mitogen_linear
-```
+To enable mitogen
 
 ### Run Playbook
 
@@ -79,10 +75,10 @@ docker run -it --rm \
 
 ### Modified entrypoint & Dockerfile
 
-- insert SSH private key use `base64` decode `-d`
-- Dockerfile add ssh config `LogLevel ERROR`
+-   insert SSH private key use `base64` decode `-d`
+-   Dockerfile add ssh config `LogLevel ERROR`
 
 ### Ansible Galaxy Collection
 
-- Ansible Synchronize `ansible.posix` (https://galaxy.ansible.com/ansible/posix)
-- Ansible Docker `community.docker` (https://galaxy.ansible.com/community/docker)
+-   Ansible Synchronize `ansible.posix` (https://galaxy.ansible.com/ansible/posix)
+-   Ansible Docker `community.docker` (https://galaxy.ansible.com/community/docker)
