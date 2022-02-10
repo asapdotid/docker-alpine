@@ -29,7 +29,9 @@ RUN apk --update --no-cache add \
     rsync \
     sed \
     gawk \
-    curl
+    curl \
+    perl-mime-base64 \
+    sshpass
 
 ENV TZ=${TIMEZONE}
 RUN apk add tzdata \
@@ -40,13 +42,23 @@ RUN apk add tzdata \
 RUN rm -rf /var/cache/apk/* \
     && rm -rf /tmp/*
 
-WORKDIR /data
+RUN mkdir -p /etc/ansible \
+    && echo 'localhost' > /etc/ansible/hosts \
+    && echo -e """\
+\n\
+Host *\n\
+    StrictHostKeyChecking no\n\
+    UserKnownHostsFile=/dev/null\n\
+    LogLevel ERROR\n\
+""" >> /etc/ssh/ssh_config
 
-COPY requirements.yml ./
+COPY ./requirements.yml ./
 RUN ansible-galaxy install -r requirements.yml
 
-# FROM cytopia/ansible:latest-tools
+COPY ./docker-entrypoint.sh /docker-entrypoint.sh
+RUN ["chmod", "+x", "/docker-entrypoint.sh"]
 
-# COPY --from=build /data /data
+WORKDIR /data
+ENTRYPOINT ["/docker-entrypoint.sh"]
 
-CMD [ "ansible", "--version" ]
+CMD ["ansible", "--version"]

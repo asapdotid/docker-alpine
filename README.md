@@ -33,16 +33,18 @@ docker system prune --all --force --volumes
 
 ### Environnement variable
 
-### Mitogen
-
-To enable mitogen
+| Variable                    | Description          |
+| --------------------------- | -------------------- |
+| DEPLOY_SSH_HOST_SERVER      | deploy host (server) |
+| DEPLOY_SSH_HOST_PRIVATE_KEY | deploy key (private) |
+| DEPLOY_SSH_HOST_PUBLIC_KEY  | deploy key (public)  |
 
 ### Run Playbook
 
 ```
 docker run -it --rm \
-  -v ${PWD}:/ansible \
-  asapdotid/ansible-alpine:latest \
+  -v ${PWD}:/data \
+  asapdotid/ansible:tools \
   ansible-playbook -i inventory playbook.yml
 ```
 
@@ -50,16 +52,16 @@ docker run -it --rm \
 
 ```
 docker run -it --rm \
-  -v ${PWD}:/ansible \
-  asapdotid/ansible-alpine:latest \
+  -v ${PWD}:/data \
+  asapdotid/ansible:tools \
   ansible-galaxy init role-name
 ```
 
 ### Lint Role
 
 ```
-docker run -it --rm asapdotid/ansible-alpine:latest \
-  -v ${PWD}:/ansible ansible-playbook tests/playbook.yml --syntax-check
+docker run -it --rm asapdotid/ansible:tools \
+  -v ${PWD}:/data ansible-playbook tests/playbook.yml --syntax-check
 ```
 
 ### Run with forwarding ssh agent
@@ -67,9 +69,9 @@ docker run -it --rm asapdotid/ansible-alpine:latest \
 ```
 docker run -it --rm \
   -v $(readlink -f $SSH_AUTH_SOCK):/ssh-agent \
-  -v ${PWD}:/ansible \
+  -v ${PWD}:/data \
   -e SSH_AUTH_SOCK=/ssh-agent \
-  asapdotid/ansible-alpine:latest \
+  asapdotid/ansible:tools \
   sh
 ```
 
@@ -82,3 +84,13 @@ docker run -it --rm \
 
 -   Ansible Synchronize `ansible.posix` (https://galaxy.ansible.com/ansible/posix)
 -   Ansible Docker `community.docker` (https://galaxy.ansible.com/community/docker)
+
+## License
+
+MIT / BSD
+
+## Author Information
+
+[JogjaScript](https://jogjascript.com)
+
+This role was created in 2021 by [Asapdotid](https://github.com/asapdotid).
