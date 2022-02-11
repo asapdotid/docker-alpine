@@ -31,7 +31,8 @@ RUN apk --update --no-cache add \
     gawk \
     curl \
     perl-mime-base64 \
-    sshpass
+    sshpass \
+    yq
 
 ENV TZ=${TIMEZONE}
 RUN apk add tzdata \
