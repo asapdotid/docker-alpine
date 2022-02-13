@@ -30,7 +30,8 @@ RUN apk --update --no-cache add \
     perl-mime-base64 \
     sed \
     gawk \
-    curl
+    curl \
+    yq
 
 RUN apk --update add --virtual .build-deps \
     python3-dev \
