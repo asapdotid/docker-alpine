@@ -2,7 +2,7 @@
 
 ![Docker Automated build](https://img.shields.io/docker/automated/asapdotid/ansible) [![Docker Pulls](https://img.shields.io/docker/pulls/asapdotid/ansible.svg)](https://hub.docker.com/r/asapdotid/ansible/tools)
 
-Base image: `cytopia/docker-ansible` [project](https://github.com/cytopia/docker-ansible)
+Base image: `Alpine Linux 3.15`
 
 Image version:
 
@@ -10,6 +10,7 @@ Image version:
 
 ## Additional services
 
+-   Bash
 -   Sed
 -   Curl
 -   Gawk
@@ -33,51 +34,25 @@ docker system prune --all --force --volumes
 
 ### Environnement variable
 
-| Variable                    | Description          |
-| --------------------------- | -------------------- |
-| DEPLOY_SSH_HOST_SERVER      | deploy host (server) |
-| DEPLOY_SSH_HOST_PRIVATE_KEY | deploy key (private) |
-| DEPLOY_SSH_HOST_PUBLIC_KEY  | deploy key (public)  |
+| Variable                    | Description                          |
+| --------------------------- | ------------------------------------ |
+| DEPLOY_SSH_HOST_SERVER      | deploy host (server)                 |
+| DEPLOY_SSH_HOST_PRIVATE_KEY | deploy key (private) `base64` encode |
+| DEPLOY_SSH_HOST_PUBLIC_KEY  | deploy key (public) `base64` encode  |
 
 ### Run Playbook
 
 ```
 docker run -it --rm \
-  -v ${PWD}:/data \
-  asapdotid/ansible:tools \
-  ansible-playbook -i inventory playbook.yml
-```
-
-### Generate Base Role structure
-
-```
-docker run -it --rm \
-  -v ${PWD}:/data \
-  asapdotid/ansible:tools \
-  ansible-galaxy init role-name
-```
-
-### Lint Role
-
-```
-docker run -it --rm asapdotid/ansible:tools \
-  -v ${PWD}:/data ansible-playbook tests/playbook.yml --syntax-check
-```
-
-### Run with forwarding ssh agent
-
-```
-docker run -it --rm \
-  -v $(readlink -f $SSH_AUTH_SOCK):/ssh-agent \
-  -v ${PWD}:/data \
-  -e SSH_AUTH_SOCK=/ssh-agent \
-  asapdotid/ansible:tools \
-  sh
+  -e DEPLOY_SSH_HOST_PRIVATE_KEY='__private_key_base64_encode__' \
+  -e DEPLOY_SSH_HOST_PUBLIC_KEY='__public_key_base64_encode__' \
+  asapdotid/ansible:tools
 ```
 
 ### Modified entrypoint & Dockerfile
 
 -   insert SSH private key use `base64` decode `-d`
+-   insert SSH public key use `base64` decode `-d`
 -   Dockerfile add ssh config `LogLevel ERROR`
 
 ### Ansible Galaxy Collection
