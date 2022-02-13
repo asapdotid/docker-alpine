@@ -31,14 +31,13 @@ RUN apk --update --no-cache add \
     gawk \
     curl \
     perl-mime-base64 \
-    sshpass \
-    yq
+    sshpass
 
 ENV TZ=${TIMEZONE}
 RUN apk add tzdata \
-      && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
-      && echo '$TZ' > /etc/timezone \
-      && apk del tzdata
+    && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
+    && echo '$TZ' > /etc/timezone \
+    && apk del tzdata
 
 RUN rm -rf /var/cache/apk/* \
     && rm -rf /tmp/*
