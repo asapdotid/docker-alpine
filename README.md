@@ -2,7 +2,9 @@
 
 ![Docker Automated build](https://img.shields.io/docker/automated/asapdotid/ansible) [![Docker Pulls](https://img.shields.io/docker/pulls/asapdotid/ansible.svg)](https://hub.docker.com/r/asapdotid/ansible/tools)
 
-Base image: `Alpine Linux 3.15`
+| Docker Tag | Git Release | Ansible Version | OS Version  | Support |
+| ---------- | ----------- | --------------- | ----------- | ------- |
+| tools      | Main Branch | 2.13.3          | Alpine 3.15 | -       |
 
 Image version:
 
@@ -57,8 +59,8 @@ docker run -it --rm \
 
 ### Ansible Galaxy Collection
 
--   Ansible Synchronize `ansible.posix` (https://galaxy.ansible.com/ansible/posix)
--   Ansible Docker `community.docker` (https://galaxy.ansible.com/community/docker)
+-   Ansible Synchronize `ansible.posix: version 1.4.0` (https://galaxy.ansible.com/ansible/posix)
+-   Ansible Docker `community.docker: version 3.0.2` (https://galaxy.ansible.com/community/docker)
 
 ## License
 
