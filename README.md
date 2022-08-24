@@ -1,6 +1,6 @@
 # Docker Ansible
 
-![Docker Automated build](https://img.shields.io/docker/automated/asapdotid/ansible) [![Docker Pulls](https://img.shields.io/docker/pulls/asapdotid/ansible.svg)](https://hub.docker.com/r/asapdotid/ansible/tools)
+![Docker Automated build](https://img.shields.io/docker/automated/asapdotid/ansible) ![Docker Pulls](https://img.shields.io/docker/pulls/asapdotid/ansible.svg)
 
 | Docker Tag | Git Release | Ansible Version | OS Version  | Support |
 | ---------- | ----------- | --------------- | ----------- | ------- |
