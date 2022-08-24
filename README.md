@@ -2,13 +2,9 @@
 
 ![Docker Automated build](https://img.shields.io/docker/automated/asapdotid/ansible) ![Docker Pulls](https://img.shields.io/docker/pulls/asapdotid/ansible.svg)
 
-| Docker Tag | Git Release | Ansible Version | OS Version  | Support |
-| ---------- | ----------- | --------------- | ----------- | ------- |
-| tools      | Main Branch | 2.13.3          | Alpine 3.15 | -       |
-
-Image version:
-
--   (asapdotid/ansible:tools) Tools ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/asapdotid/ansible/tools)
+| Docker Tag | Git Release | Ansible Version | OS Version  | Size                                                                                         |
+| ---------- | ----------- | --------------- | ----------- | -------------------------------------------------------------------------------------------- |
+| tools      | Main Branch | 2.13.3          | Alpine 3.15 | ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/asapdotid/ansible/tools) |
 
 ## Additional services
 
