@@ -9,11 +9,13 @@ set +o allexport
 # Check first if docker image is exist
 OLD="$(docker ps --all --quiet --filter=name=$DOCKER_REPO/$IMAGE_NAME:$IMAGE_VERSION)"
 if [ -n "$OLD" ]; then
-  exec docker stop $OLD && docker rm $OLD
+    exec docker stop $OLD && docker rm $OLD
 fi
 
 # Run Build Docker Image
-exec docker build --build-arg VCS_REF=`git rev-parse --short HEAD` \
-             --build-arg BUILD_DATE=`date -u +”%Y-%m-%dT%H:%M:%SZ”` \
-             -f $DOCKER_FILE \
-             -t $DOCKER_REPO/$IMAGE_NAME:$IMAGE_VERSION .
+exec docker build --build-arg VCS_REF=$(git rev-parse --short HEAD) \
+    --build-arg BUILD_DATE=$(date -u +”%Y-%m-%dT%H:%M:%SZ”) \
+    --build-arg ALPINE_VERSION=$ALPINE_VERSION \
+    --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION \
+    -f $DOCKER_FILE \
+    -t $DOCKER_REPO/$IMAGE_NAME:$IMAGE_VERSION .

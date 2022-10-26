@@ -1,10 +1,10 @@
-FROM alpine:3.15
+ARG ALPINE_VERSION
+FROM alpine:${ALPINE_VERSION}
 
 # Metadata params
 ARG BUILD_DATE
 ARG VCS_REF
 ARG ANSIBLE_VERSION
-ENV ANSIBLE_VERSION ${ANSIBLE_VERSION}
 
 # Metadata
 LABEL maintainer="Asapdotid <asapdotid@gmail.com>" \
