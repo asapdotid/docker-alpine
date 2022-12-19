@@ -1,10 +1,10 @@
-ARG ALPINE_VERSION
+ARG ALPINE_VERSION=3.17
 FROM alpine:${ALPINE_VERSION}
 
 # Metadata params
 ARG BUILD_DATE
 ARG VCS_REF
-ARG ANSIBLE_VERSION
+ARG ANSIBLE_VERSION=7.1.0
 
 # Metadata
 LABEL maintainer="Asapdotid <asapdotid@gmail.com>" \
@@ -54,12 +54,12 @@ RUN pip3 install --upgrade pip wheel && \
 RUN mkdir -p /etc/ansible && \
     echo 'localhost' > /etc/ansible/hosts && \
     echo -e """\
-\n\
-Host *\n\
+    \n\
+    Host *\n\
     StrictHostKeyChecking no\n\
     UserKnownHostsFile=/dev/null\n\
     LogLevel ERROR\n\
-""" >> /etc/ssh/ssh_config
+    """ >> /etc/ssh/ssh_config
 
 COPY ./requirements.yml ./
 RUN ansible-galaxy install -r requirements.yml
@@ -67,7 +67,7 @@ RUN ansible-galaxy install -r requirements.yml
 COPY ./scripts/entrypoint.sh /
 RUN ["chmod", "+x", "/entrypoint.sh"]
 
-WORKDIR /ansible
+WORKDIR /app
 ENTRYPOINT ["/entrypoint.sh"]
 
 # default command: display Ansible version

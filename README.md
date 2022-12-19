@@ -4,7 +4,7 @@
 
 | Docker Tag | Git Release | Ansible Version | OS Version  | Size                                                                                         |
 | ---------- | ----------- | --------------- | ----------- | -------------------------------------------------------------------------------------------- |
-| tools      | Main Branch | 2.13.3          | Alpine 3.15 | ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/asapdotid/ansible/tools) |
+| tools      | Main Branch | 2.14.0          | Alpine 3.15 | ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/asapdotid/ansible/tools) |
 
 ## Additional services
 
