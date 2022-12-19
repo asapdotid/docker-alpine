@@ -1,4 +1,4 @@
-# Docker Ansible
+# Docker Ansible (Alpine Linux base)
 
 ![Docker Automated build](https://img.shields.io/docker/automated/asapdotid/ansible) ![Docker Pulls](https://img.shields.io/docker/pulls/asapdotid/ansible.svg)
 
@@ -56,7 +56,7 @@ docker run -it --rm \
 ### Ansible Galaxy Collection
 
 -   Ansible Synchronize `ansible.posix: version 1.4.0` (https://galaxy.ansible.com/ansible/posix)
--   Ansible Docker `community.docker: version 3.0.2` (https://galaxy.ansible.com/community/docker)
+-   Ansible Docker `community.docker: version 3.3.1` (https://galaxy.ansible.com/community/docker)
 
 ## License
 
