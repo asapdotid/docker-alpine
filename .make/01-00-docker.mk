@@ -21,6 +21,7 @@ DOCKER_BUILD_COMMAND:= \
     docker buildx build \
     --build-arg BUILD_DATE=`date -u +”%Y-%m-%dT%H:%M:%SZ”` \
     --build-arg VCS_REF=`git rev-parse --short HEAD` \
+    --build-arg ALPINE_VERSION=$(ALPINE_VERSION) \
     --build-arg ANSIBLE_VERSION=$(ANSIBLE_VERSION) \
     -f $(DOCKER_BUILD_IMAGE_FILE) \
 	-t $(DOCKER_REGISTRY)/$(DOCKER_NAMESPACE)/$(DOCKER_IMAGE_NAME):$(TAG) .
