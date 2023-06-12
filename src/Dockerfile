@@ -1,10 +1,10 @@
-ARG ALPINE_VERSION=3.15
+ARG ALPINE_VERSION=3.17
 FROM alpine:${ALPINE_VERSION}
 
 # Metadata params
-ARG BUILD_DATE
-ARG VCS_REF
-ARG ANSIBLE_VERSION
+ARG BUILD_DATE=`date -u +”%Y-%m-%dT%H:%M:%SZ”`
+ARG VCS_REF=`git rev-parse --short HEAD`
+ARG ANSIBLE_VERSION=8.0.0
 
 # Metadata
 LABEL maintainer="Asapdotid <asapdotid@gmail.com>" \
