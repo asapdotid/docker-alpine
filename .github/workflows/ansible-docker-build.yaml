@@ -54,10 +54,10 @@ jobs:
 
       ### path to where docker should copy files into image
       ### defaults to root of repository (.)
-      # context: .
+      context: .
 
       ### Dockerfile alternate name. Default is Dockerfile (relative to context path)
-      # file: Dockerfile
+      file: src/Dockerfile
 
       ### build stage to target, defaults to empty, which builds to last stage in Dockerfile
       # target:
