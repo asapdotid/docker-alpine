@@ -3,3 +3,4 @@
 logs/
 *.md
 .cache
+.make

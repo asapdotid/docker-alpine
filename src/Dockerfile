@@ -1,4 +1,4 @@
-FROM alpine:3.15
+FROM alpine:3.18
 
 # Metadata params
 ARG BUILD_DATE
@@ -54,17 +54,17 @@ RUN pip3 install --upgrade pip wheel && \
 RUN mkdir -p /etc/ansible && \
     echo 'localhost' > /etc/ansible/hosts && \
     echo -e """\
-\n\
-Host *\n\
+    \n\
+    Host *\n\
     StrictHostKeyChecking no\n\
     UserKnownHostsFile=/dev/null\n\
     LogLevel ERROR\n\
-""" >> /etc/ssh/ssh_config
+    """ >> /etc/ssh/ssh_config
 
-COPY ./requirements.yml ./
+COPY src/requirements.yml ./
 RUN ansible-galaxy install -r requirements.yml
 
-COPY ./scripts/entrypoint.sh /
+COPY src/entrypoint.sh /
 RUN ["chmod", "+x", "/entrypoint.sh"]
 
 WORKDIR /ansible
