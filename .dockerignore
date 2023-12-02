@@ -1,7 +1,10 @@
 .git
 .gitignore
 .github
+.editorconfig
 logs/
 *.md
 .cache
 .make
+src/*
+!src/tool/*.sh
