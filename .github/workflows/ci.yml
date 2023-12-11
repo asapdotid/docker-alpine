@@ -20,10 +20,17 @@ jobs:
         with:
           username: ${{ github.actor }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and push
+      - name: Build and push (ssh)
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: src/Dockerfile
+          file: src/ssh/Dockerfile
           push: true
-          tags: asapdotid/ansible:tools
+          tags: asapdotid/alpine:ssh
+      - name: Build and push (tool)
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: src/tool/Dockerfile
+          push: true
+          tags: asapdotid/alpine:tool
