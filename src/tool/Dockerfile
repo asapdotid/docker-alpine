@@ -1,10 +1,10 @@
-ARG ALPINE_VERSION=3.18
+ARG ALPINE_VERSION
 FROM alpine:${ALPINE_VERSION}
 
 # Metadata
 LABEL maintainer="Asapdotid <asapdotid@gmail.com>"
 
-RUN apk --update --no-cache add \
+RUN apk --no-cache --update add \
     ca-certificates \
     bash \
     git \
@@ -17,27 +17,28 @@ RUN apk --update --no-cache add \
     gawk \
     curl \
     yq \
-    tzdata
-
-RUN apk --update add --virtual .build-deps \
+    tzdata \
+    ## Build dependecies
+    && apk --no-cache add --virtual .build-deps \
     python3-dev \
     libffi-dev \
     openssl-dev \
-    build-base
+    build-base \
+    ## Create and activate virtualenv:
+    && python3 -m venv /opt/venv
 
-RUN python3 -m venv /opt/venv
 # Make sure we use the virtualenv:
 ENV PATH "/opt/venv/bin:$PATH"
 
-RUN apk del .build-deps && \
-    rm -rf /var/cache/apk/* && \
-    rm -rf /root/.cache/pip
+RUN apk del .build-deps \
+    && rm -rf /var/cache/apk/* \
+    && rm -rf /root/.cache/pip
 
 # Timezone
 ENV TZ ${TIMEZONE}
 RUN ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime && echo ${TZ} >/etc/timezone
 
-RUN echo -e """\
+RUN printf """\
     \n\
     Host *\n\
     StrictHostKeyChecking no\n\

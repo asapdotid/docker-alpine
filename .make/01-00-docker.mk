@@ -19,6 +19,7 @@ endif
 # Run Build Docker Image
 DOCKER_BUILD_COMMAND:= \
     docker buildx build \
+	--provenance=true --sbom=true \
     --build-arg ALPINE_VERSION=$(ALPINE_VERSION) \
     -f $(DOCKER_BUILD_IMAGE_FILE) \
 	-t $(DOCKER_REGISTRY)/$(DOCKER_NAMESPACE)/$(DOCKER_IMAGE_NAME):$(TAG) --push .

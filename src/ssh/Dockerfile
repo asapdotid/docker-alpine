@@ -1,4 +1,4 @@
-ARG ALPINE_VERSION=3.18
+ARG ALPINE_VERSION
 FROM alpine:${ALPINE_VERSION}
 
 # Metadata
@@ -7,9 +7,9 @@ LABEL maintainer="Asapdotid <asapdotid@gmail.com>"
 RUN apk --update --no-cache add \
     ca-certificates \
     openssh \
-    bash
-
-RUN echo -e """ \
+    bash \
+    ## Update ssh config:
+    && printf """ \
     \n \
     Host *\n \
     StrictHostKeyChecking no\n \
