@@ -1,4 +1,4 @@
-ARG ALPINE_VERSION
+ARG ALPINE_VERSION=3.19
 FROM alpine:${ALPINE_VERSION}
 
 # Metadata
@@ -35,6 +35,7 @@ RUN apk del .build-deps \
     && rm -rf /root/.cache/pip
 
 # Timezone
+ARG TIMEZONE=Asia/Jakarta
 ENV TZ ${TIMEZONE}
 RUN ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime && echo ${TZ} >/etc/timezone
 
